@@ -1,0 +1,1 @@
+A Console App version of the Board Game 'Pandemic'
