@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\DifficultyLevel.cs" />
     <Compile Include="Managers\GameManager.cs" />
     <Compile Include="Managers\ConsoleInteractionManager.cs" />
     <Compile Include="Enums\OutputLevel.cs" />

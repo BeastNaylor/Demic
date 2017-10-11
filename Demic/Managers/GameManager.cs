@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Demic.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,13 +10,13 @@ namespace Demic.Managers
     {
         private IInteractionManager _interactionManager;
         private int _num = 0;
+        private int _epidemicCards = 0;
 
         public GameManager(IInteractionManager interactionManager)
         {
             _interactionManager = interactionManager;
         }
 
-        //entry point for GameManager
         public void Start()
         {
             //setup the initial state of the game
@@ -36,7 +37,7 @@ namespace Demic.Managers
         private void TurnEnd()
         {
             //perform end of turn action, whilst checking for GameOver
-            _num -= 2;
+            _num -= _epidemicCards;
             if (_num < 0 || _num > 9)
             {
                 GameOver();
@@ -71,6 +72,21 @@ namespace Demic.Managers
         private void SetupGame()
         {
             _num = 5;
+            _epidemicCards = GetDifficulty();
+            _interactionManager.OutputContent(String.Format("EpidemicCard Count is {0}", _epidemicCards));
+        }
+
+        private int GetDifficulty()
+        {
+            var difficulties = new List<string>();
+            foreach (DifficultyLevel level in Enum.GetValues(typeof(DifficultyLevel)))
+            {
+                difficulties.Add(level.ToString());
+            }
+
+            var difficultyInput = _interactionManager.ReadInput("Please select a difficulty level for Epidemic", difficulties);
+            DifficultyLevel difficultyLevel = (DifficultyLevel)Enum.Parse(typeof(DifficultyLevel), difficultyInput);
+            return (int)difficultyLevel;
         }
     }
 }
