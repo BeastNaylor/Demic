@@ -24,9 +24,9 @@ namespace Demic.Managers
             {
                 this.OutputContent(message);
                 this.OutputContent("[Options are: " + String.Join(", ", options.ToArray()) + "]");
-                input = Console.ReadLine();
+                input = Console.ReadLine().ToUpper();
                 this.OutputContent(input, OutputLevel.Debug);
-                if (options.Contains(input.ToUpper()))
+                if (options.Contains(input))
                 {
                     inputValid = true;
                 }
