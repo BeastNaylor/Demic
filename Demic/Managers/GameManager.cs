@@ -1,4 +1,5 @@
 ﻿using Demic.Enums;
+using Demic.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,14 @@ namespace Demic.Managers
     class GameManager
     {
         private IInteractionManager _interactionManager;
-        private int _num = 0;
+        private LocationManager _locationManager;
         private int _epidemicCards = 0;
+        private BoardState _boardState;
 
         public GameManager(IInteractionManager interactionManager)
         {
             _interactionManager = interactionManager;
+            _locationManager = new LocationManager();
         }
 
         public void Start()
@@ -28,17 +31,17 @@ namespace Demic.Managers
         private void RequestAction()
         {
             //receive input from User
-            _interactionManager.OutputContent(String.Format("Number is currently {0}", _num));
-            var input = _interactionManager.ReadInput("Add a Number", new List<string>() { "1", "2", "3" });
-            _num += int.Parse(input);
+            _interactionManager.OutputContent(String.Format("Total Blue Cubes is currently {0}", _boardState.totalCubes(DiseaseColour.Blue)));
+            var input = Int32.Parse(_interactionManager.ReadInput("Add a Number", new List<string>() { "1", "2", "3" }));
+            _boardState.AddCubes(_locationManager.GetLocations().First(), input);
             TurnEnd();
         }
 
         private void TurnEnd()
         {
             //perform end of turn action, whilst checking for GameOver
-            _num -= _epidemicCards;
-            if (_num < 0 || _num > 9)
+
+            if (_boardState.totalCubes(DiseaseColour.Blue) > 10)
             {
                 GameOver();
             }
@@ -71,7 +74,7 @@ namespace Demic.Managers
 
         private void SetupGame()
         {
-            _num = 5;
+            _boardState = new BoardState(_locationManager);
             _epidemicCards = GetDifficulty();
             _interactionManager.OutputContent(String.Format("EpidemicCard Count is {0}", _epidemicCards));
         }

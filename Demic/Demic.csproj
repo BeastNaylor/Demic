@@ -42,11 +42,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\BoardState.cs" />
+    <Compile Include="Classes\Location.cs" />
     <Compile Include="Enums\DifficultyLevel.cs" />
+    <Compile Include="Enums\DiseaseColour.cs" />
     <Compile Include="Managers\GameManager.cs" />
     <Compile Include="Managers\ConsoleInteractionManager.cs" />
     <Compile Include="Enums\OutputLevel.cs" />
     <Compile Include="Managers\IInteractionManager.cs" />
+    <Compile Include="Managers\LocationManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
