@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demic", "Demic.csproj", "{3552B603-AD96-460E-BD36-9FEF805F7A8B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemicTest", "..\DemicTest\DemicTest.csproj", "{C58DA3DD-2F49-4574-B7FB-819FC3317B4B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3552B603-AD96-460E-BD36-9FEF805F7A8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3552B603-AD96-460E-BD36-9FEF805F7A8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3552B603-AD96-460E-BD36-9FEF805F7A8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C58DA3DD-2F49-4574-B7FB-819FC3317B4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C58DA3DD-2F49-4574-B7FB-819FC3317B4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C58DA3DD-2F49-4574-B7FB-819FC3317B4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C58DA3DD-2F49-4574-B7FB-819FC3317B4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
