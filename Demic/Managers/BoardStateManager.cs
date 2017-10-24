@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Demic.Enums;
-using Demic.Managers;
+using Demic.Classes;
 
-namespace Demic.Classes
+namespace Demic.Managers
 {
-    class BoardState
+    class BoardStateManager
     {
         private IDictionary<Location, IDictionary<DiseaseColour, int>> _boardLocations;
         LocationManager _locationManager;
@@ -20,7 +20,7 @@ namespace Demic.Classes
             return count;
         }
 
-        public BoardState(LocationManager locationManager)
+        public BoardStateManager(LocationManager locationManager)
         {
             _locationManager = locationManager;
             _boardLocations = new Dictionary<Location, IDictionary<DiseaseColour, int>>();

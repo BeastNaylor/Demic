@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\BoardState.cs" />
+    <Compile Include="Managers\BoardStateManager.cs" />
     <Compile Include="Classes\Location.cs" />
     <Compile Include="Enums\DifficultyLevel.cs" />
     <Compile Include="Enums\DiseaseColour.cs" />

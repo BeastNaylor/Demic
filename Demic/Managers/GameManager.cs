@@ -12,7 +12,7 @@ namespace Demic.Managers
         private IInteractionManager _interactionManager;
         private LocationManager _locationManager;
         private int _epidemicCards = 0;
-        private BoardState _boardState;
+        private BoardStateManager _boardState;
 
         public GameManager(IInteractionManager interactionManager)
         {
@@ -74,7 +74,7 @@ namespace Demic.Managers
 
         private void SetupGame()
         {
-            _boardState = new BoardState(_locationManager);
+            _boardState = new BoardStateManager(_locationManager);
             _epidemicCards = GetDifficulty();
             _interactionManager.OutputContent(String.Format("EpidemicCard Count is {0}", _epidemicCards));
         }
