@@ -10,16 +10,22 @@ namespace Demic.Managers
 {
     class LocationManager
     {
+        private static IList<Location> _locations;
+
         public IEnumerable<Location> GetLocations()
         {
-            IList<Location> locations = new List<Location>();
-            locations.Add(new Location() { Name = "Atlanta", Colour = DiseaseColour.Blue });
-            locations.Add(new Location() { Name = "Madrid", Colour = DiseaseColour.Blue });
-            locations.Add(new Location() { Name = "New York", Colour = DiseaseColour.Blue });
-            locations.Add(new Location() { Name = "Montreal", Colour = DiseaseColour.Blue });
-            locations.Add(new Location() { Name = "London", Colour = DiseaseColour.Blue });
-            locations.Add(new Location() { Name = "Miami", Colour = DiseaseColour.Yellow });
-            return locations;
+            if (_locations == null)
+            {
+                _locations = new List<Location>();
+                _locations.Add(new Location() { Name = "Atlanta", Colour = DiseaseColour.Blue });
+                _locations.Add(new Location() { Name = "Madrid", Colour = DiseaseColour.Blue });
+                _locations.Add(new Location() { Name = "New York", Colour = DiseaseColour.Blue });
+                _locations.Add(new Location() { Name = "Montreal", Colour = DiseaseColour.Blue });
+                _locations.Add(new Location() { Name = "London", Colour = DiseaseColour.Blue });
+                _locations.Add(new Location() { Name = "Miami", Colour = DiseaseColour.Yellow });
+
+            }
+            return _locations;
         }
     }
 }
