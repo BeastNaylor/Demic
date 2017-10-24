@@ -14,6 +14,11 @@ namespace Demic.Managers
         private int _outbreakCount;
         ILocationManager _locationManager;
 
+        public int OutbreakCount
+        {
+            get { return _outbreakCount; }
+        }
+
         public int totalCubes(DiseaseColour disease)
         {
             //sum up the cubes of the given disease
