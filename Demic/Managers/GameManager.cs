@@ -11,7 +11,8 @@ namespace Demic.Managers
     {
         private IInteractionManager _interactionManager;
         private ILocationManager _locationManager;
-        private int _epidemicCards = 0;
+        private int _epidemicCards;
+        private int _infectionDrawCount;
         private BoardStateManager _boardState;
 
         public GameManager(IInteractionManager interactionManager, ILocationManager locationManager)
@@ -30,17 +31,25 @@ namespace Demic.Managers
 
         private void RequestAction()
         {
-            //receive input from User
-            _interactionManager.OutputContent(String.Format("Total Blue Cubes is currently {0}", _boardState.totalCubes(DiseaseColour.Blue)));
+            OutputBoardState();
+            //receive actions from the User
             var input = Int32.Parse(_interactionManager.ReadInput("Add a Number", new List<string>() { "1", "2", "3" }));
-            _boardState.AddCubes(_locationManager.GetLocations().First(), input);
             TurnEnd();
+        }
+
+        private void OutputBoardState()
+        {
+            //this will output the state of the game currently, allowing the player to know what state the game is in
+            //different levels of info, with drill down specifics
+            //e.g.
+            _interactionManager.OutputContent(String.Format("Total Blue Cubes is currently {0}", _boardState.totalCubes(DiseaseColour.Blue)));
         }
 
         private void TurnEnd()
         {
             //perform end of turn action, whilst checking for GameOver
-
+            DrawPlayerCards();
+            DrawInfectionCards();
             if (_boardState.totalCubes(DiseaseColour.Blue) > 10)
             {
                 GameOver();
@@ -50,6 +59,18 @@ namespace Demic.Managers
                 //game not over, ask for new action
                 RequestAction();
             }
+        }
+
+        private void DrawInfectionCards()
+        {
+            //draw cards from the infection deck and add cubes
+            //e.g.
+            _boardState.AddCubes(_locationManager.GetLocations().First(), 1);
+        }
+
+        private void DrawPlayerCards()
+        {
+            //draw cards from the player draw deck
         }
 
         private void GameOver()
@@ -74,12 +95,16 @@ namespace Demic.Managers
 
         private void SetupGame()
         {
+            //on setup, reset all variables to their defaults
             _boardState = new BoardStateManager(_locationManager);
-            _epidemicCards = GetDifficulty();
-            _interactionManager.OutputContent(String.Format("EpidemicCard Count is {0}", _epidemicCards));
+            _infectionDrawCount = Properties.Settings.Default.DEFAULT_INFECTION_DRAW;
+            DifficultyLevel diffLevel = GetDifficulty();
+            _epidemicCards = (int)diffLevel;
+
+            _interactionManager.OutputContent(String.Format("Epidemic Card Count for {0} is {1}", diffLevel.ToString(), _epidemicCards));
         }
 
-        private int GetDifficulty()
+        private DifficultyLevel GetDifficulty()
         {
             var difficulties = new List<string>();
             foreach (DifficultyLevel level in Enum.GetValues(typeof(DifficultyLevel)))
@@ -89,7 +114,7 @@ namespace Demic.Managers
 
             var difficultyInput = _interactionManager.ReadInput("Please select a difficulty level for Epidemic", difficulties);
             DifficultyLevel difficultyLevel = (DifficultyLevel)Enum.Parse(typeof(DifficultyLevel), difficultyInput);
-            return (int)difficultyLevel;
+            return difficultyLevel;
         }
     }
 }

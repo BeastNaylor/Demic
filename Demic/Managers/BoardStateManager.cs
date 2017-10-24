@@ -11,6 +11,7 @@ namespace Demic.Managers
     internal class BoardStateManager
     {
         private IDictionary<Location, IDictionary<DiseaseColour, int>> _boardLocations;
+        private int _outbreakCount;
         ILocationManager _locationManager;
 
         public int totalCubes(DiseaseColour disease)
@@ -22,6 +23,7 @@ namespace Demic.Managers
 
         public BoardStateManager(ILocationManager locationManager)
         {
+            _outbreakCount = 0;
             _locationManager = locationManager;
             _boardLocations = new Dictionary<Location, IDictionary<DiseaseColour, int>>();
             foreach (Location location in _locationManager.GetLocations())
@@ -40,6 +42,24 @@ namespace Demic.Managers
         {
             var cubes = _boardLocations.Where(key => key.Key.ToString() == loc.ToString()).Single();
             cubes.Value[loc.Colour] += numCubes;
+        }
+
+        //check the different conditions for failure
+        public bool CheckLossConditions()
+        {
+            bool loss = false;
+            if (_outbreakCount > Properties.Settings.Default.MAX_OUTBREAK_COUNT)
+            {
+                loss = true;
+            }
+            foreach (DiseaseColour colour in Enum.GetValues(typeof(DiseaseColour)))
+            {
+                if (this.totalCubes(colour) > Properties.Settings.Default.MAX_DISEASE_CUBES)
+                {
+                    loss = true;
+                }
+            }
+            return loss;
         }
 
     }
