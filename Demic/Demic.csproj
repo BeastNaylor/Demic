@@ -50,6 +50,7 @@
     <Compile Include="Managers\ConsoleInteractionManager.cs" />
     <Compile Include="Enums\OutputLevel.cs" />
     <Compile Include="Managers\IInteractionManager.cs" />
+    <Compile Include="Managers\ILocationManager.cs" />
     <Compile Include="Managers\LocationManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

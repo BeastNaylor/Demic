@@ -8,10 +8,10 @@ using Demic.Classes;
 
 namespace Demic.Managers
 {
-    class BoardStateManager
+    internal class BoardStateManager
     {
         private IDictionary<Location, IDictionary<DiseaseColour, int>> _boardLocations;
-        LocationManager _locationManager;
+        ILocationManager _locationManager;
 
         public int totalCubes(DiseaseColour disease)
         {
@@ -20,7 +20,7 @@ namespace Demic.Managers
             return count;
         }
 
-        public BoardStateManager(LocationManager locationManager)
+        public BoardStateManager(ILocationManager locationManager)
         {
             _locationManager = locationManager;
             _boardLocations = new Dictionary<Location, IDictionary<DiseaseColour, int>>();

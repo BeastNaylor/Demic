@@ -10,14 +10,14 @@ namespace Demic.Managers
     class GameManager
     {
         private IInteractionManager _interactionManager;
-        private LocationManager _locationManager;
+        private ILocationManager _locationManager;
         private int _epidemicCards = 0;
         private BoardStateManager _boardState;
 
-        public GameManager(IInteractionManager interactionManager)
+        public GameManager(IInteractionManager interactionManager, ILocationManager locationManager)
         {
             _interactionManager = interactionManager;
-            _locationManager = new LocationManager();
+            _locationManager = locationManager;
         }
 
         public void Start()

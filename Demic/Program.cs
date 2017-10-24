@@ -12,7 +12,8 @@ namespace Demic
         static void Main(string[] args)
         {
             var interactionManager = new ConsoleInteractionManager(Demic.Enums.OutputLevel.Information);
-            var gameManager = new GameManager(interactionManager);
+            var locationManager = new LocationManager();
+            var gameManager = new GameManager(interactionManager, locationManager);
             gameManager.Start();
         }
     }

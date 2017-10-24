@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Demic.Managers
 {
-    internal class LocationManager
+    internal class LocationManager : ILocationManager
     {
         private static IList<Location> _locations;
 

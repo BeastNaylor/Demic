@@ -52,6 +52,8 @@
   <ItemGroup>
     <Compile Include="LocationManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BoardStateManagerTests.cs" />
+    <Compile Include="TestLocationManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Demic\Demic.csproj">
