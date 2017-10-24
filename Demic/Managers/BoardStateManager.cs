@@ -49,6 +49,12 @@ namespace Demic.Managers
             cubes.Value[loc.Colour] += numCubes;
         }
 
+        public void SetCubes(Location loc, int numCubes)
+        {
+            var cubes = _boardLocations.Where(key => key.Key.ToString() == loc.ToString()).Single();
+            cubes.Value[loc.Colour] = numCubes;
+        }
+
         //check the different conditions for failure
         public bool CheckLossConditions()
         {

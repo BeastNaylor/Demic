@@ -33,6 +33,27 @@ namespace DemicTest
         }
 
         [TestMethod]
+        public void SetCubesToThreeFromZeroAtAtlanta()
+        {
+            var testLocationManager = new TestLocationManager();
+            var loc = testLocationManager.GetLocations().First();
+            var boardManager = new BoardStateManager(testLocationManager);
+            boardManager.SetCubes(loc, 3);
+            Assert.AreEqual<int>(3, boardManager.totalCubes(loc.Colour), "Setting cubes to 3 doesn't result in correct number");
+        }
+
+        [TestMethod]
+        public void SetCubesToThreeFromTwoAtAtlanta()
+        {
+            var testLocationManager = new TestLocationManager();
+            var loc = testLocationManager.GetLocations().First();
+            var boardManager = new BoardStateManager(testLocationManager);
+            boardManager.AddCubes(loc, 2);
+            boardManager.SetCubes(loc, 3);
+            Assert.AreEqual<int>(3, boardManager.totalCubes(loc.Colour), "Increasing cubes to 3 from 2 doesn't result in correct number");
+        }
+
+        [TestMethod]
         public void OutbreakCountStartsAtZero()
         {
             var testLocationManager = new TestLocationManager();
