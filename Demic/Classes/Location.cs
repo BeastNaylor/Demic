@@ -9,8 +9,14 @@ namespace Demic.Classes
 {
     class Location
     {
-        public string Name;
-        public DiseaseColour Colour;
+        public readonly string Name;
+        public readonly DiseaseColour Colour;
+
+        public Location(string name, DiseaseColour colour)
+        {
+            this.Name = name;
+            this.Colour = colour;
+        }
 
         public override string ToString()
         {

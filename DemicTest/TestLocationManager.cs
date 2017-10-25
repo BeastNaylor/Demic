@@ -14,7 +14,7 @@ namespace DemicTest
         public IEnumerable<Location> GetLocations()
         {
             var locations = new List<Location>();
-            locations.Add(new Location() { Name = "Atlanta", Colour = DiseaseColour.Blue });
+            locations.Add(new Location("Atlanta", DiseaseColour.Blue));
             return locations;
         }
     }

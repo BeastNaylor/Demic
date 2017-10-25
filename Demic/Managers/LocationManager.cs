@@ -17,12 +17,12 @@ namespace Demic.Managers
             if (_locations == null)
             {
                 _locations = new List<Location>();
-                _locations.Add(new Location() { Name = "Atlanta", Colour = DiseaseColour.Blue });
-                _locations.Add(new Location() { Name = "Madrid", Colour = DiseaseColour.Blue });
-                _locations.Add(new Location() { Name = "New York", Colour = DiseaseColour.Blue });
-                _locations.Add(new Location() { Name = "Montreal", Colour = DiseaseColour.Blue });
-                _locations.Add(new Location() { Name = "London", Colour = DiseaseColour.Blue });
-                _locations.Add(new Location() { Name = "Miami", Colour = DiseaseColour.Yellow });
+                _locations.Add(new Location("Atlanta", DiseaseColour.Blue));
+                _locations.Add(new Location("Madrid", DiseaseColour.Blue));
+                _locations.Add(new Location("New York", DiseaseColour.Blue));
+                _locations.Add(new Location("Montreal", DiseaseColour.Blue));
+                _locations.Add(new Location("London", DiseaseColour.Blue));
+                _locations.Add(new Location("Miami", DiseaseColour.Yellow));
 
             }
             return _locations;
