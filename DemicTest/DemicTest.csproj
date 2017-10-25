@@ -55,6 +55,7 @@
     <Compile Include="BoardStateManagerTests.cs" />
     <Compile Include="TestLocationManager.cs" />
     <Compile Include="PlayerTests.cs" />
+    <Compile Include="LocationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Demic\Demic.csproj">

@@ -45,13 +45,13 @@ namespace Demic.Managers
 
         public void AddCubes(Location loc, int numCubes)
         {
-            var cubes = _boardLocations.Where(key => key.Key.ToString() == loc.ToString()).Single();
+            var cubes = _boardLocations.Where(dct => dct.Key.Equals(loc)).Single();
             cubes.Value[loc.Colour] += numCubes;
         }
 
         public void SetCubes(Location loc, int numCubes)
         {
-            var cubes = _boardLocations.Where(key => key.Key.ToString() == loc.ToString()).Single();
+            var cubes = _boardLocations.Where(dct => dct.Key.Equals(loc)).Single();
             cubes.Value[loc.Colour] = numCubes;
         }
 

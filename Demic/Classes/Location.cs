@@ -22,5 +22,16 @@ namespace Demic.Classes
         {
             return String.Format("{0} : {1}", Name, Colour.ToString());
         }
+
+        public override bool Equals(object obj)
+        {
+            if (this == obj)
+                return true;
+            if ((obj == null) || (obj.GetType() != this.GetType()))
+                return false;
+            
+            Location otherLoc = (Location)obj;
+            return (this.Name == otherLoc.Name);
+        }
     }
 }

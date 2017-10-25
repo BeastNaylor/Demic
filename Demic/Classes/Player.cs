@@ -31,7 +31,7 @@ namespace Demic.Classes
                 return true;
             if ((obj == null) || (obj.GetType() != this.GetType()))
                 return false;
-            // object must be Test at this point
+
             Player otherPlayer = (Player)obj;
             return (this.Name == otherPlayer.Name && this.Role == otherPlayer.Role);
         }
