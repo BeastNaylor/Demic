@@ -12,6 +12,11 @@ namespace Demic.Managers
     {
         private static IList<Location> _locations;
 
+        public Location StartingLocation
+        {
+            get { return _locations.Where(loc => loc.Name == Properties.Settings.Default.DEFAULT_STARTING_LOCATION).Single(); }
+        }
+
         public IEnumerable<Location> GetLocations()
         {
             if (_locations == null)

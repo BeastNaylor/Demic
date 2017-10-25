@@ -55,5 +55,29 @@ namespace Demic.Properties {
                 this["MAX_OUTBREAK_COUNT"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Atlanta")]
+        public string DEFAULT_STARTING_LOCATION {
+            get {
+                return ((string)(this["DEFAULT_STARTING_LOCATION"]));
+            }
+            set {
+                this["DEFAULT_STARTING_LOCATION"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int MAX_INPUT_LENGTH {
+            get {
+                return ((int)(this["MAX_INPUT_LENGTH"]));
+            }
+            set {
+                this["MAX_INPUT_LENGTH"] = value;
+            }
+        }
     }
 }

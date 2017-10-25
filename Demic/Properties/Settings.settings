@@ -11,5 +11,11 @@
     <Setting Name="MAX_OUTBREAK_COUNT" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">7</Value>
     </Setting>
+    <Setting Name="DEFAULT_STARTING_LOCATION" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Atlanta</Value>
+    </Setting>
+    <Setting Name="MAX_INPUT_LENGTH" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
