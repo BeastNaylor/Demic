@@ -11,10 +11,15 @@ namespace DemicTest
 {
     class TestLocationManager :ILocationManager
     {
+        public Location StartingLocation
+        {
+            get { return new Location("Atlanta", DiseaseColour.Blue); }
+        }
+
         public IEnumerable<Location> GetLocations()
         {
             var locations = new List<Location>();
-            locations.Add(new Location() { Name = "Atlanta", Colour = DiseaseColour.Blue });
+            locations.Add(new Location("Atlanta", DiseaseColour.Blue));
             return locations;
         }
     }

@@ -38,6 +38,28 @@ namespace Demic.Managers
             return input;
         }
 
+        public string ReadInput(string message)
+        {
+            bool inputValid = false;
+            string input;
+            do
+            {
+                this.OutputContent(message);
+                this.OutputContent("[Max Length: " + Properties.Settings.Default.MAX_INPUT_LENGTH + "]");
+                input = Console.ReadLine().ToUpper();
+                this.OutputContent(input, OutputLevel.Debug);
+                if (input.Length <= Properties.Settings.Default.MAX_INPUT_LENGTH)
+                {
+                    inputValid = true;
+                }
+                else
+                {
+                    this.OutputContent("Input too long. Please try again.");
+                }
+            } while (!inputValid);
+            return input;
+        }
+
         public void OutputContent(string message, OutputLevel level = OutputLevel.Information)
         {
             if (_minimumLevel <= level)

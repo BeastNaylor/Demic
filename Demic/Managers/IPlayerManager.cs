@@ -1,5 +1,6 @@
 ﻿using Demic.Classes;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,10 +8,12 @@ using System.Threading.Tasks;
 
 namespace Demic.Managers
 {
-    interface ILocationManager
+    interface IPlayerManager
     {
-        IEnumerable<Location> GetLocations();
+        void AddPlayer(Player player);
 
-        Location StartingLocation { get; }
+        void EndPlayerTurn();
+
+        Player CurrentPlayerTurn();
     }
 }

@@ -11,14 +11,16 @@ namespace Demic.Managers
     {
         private IInteractionManager _interactionManager;
         private ILocationManager _locationManager;
+        private IPlayerManager _playerManager;
         private int _epidemicCards;
         private int _infectionDrawCount;
         private BoardStateManager _boardState;
 
-        public GameManager(IInteractionManager interactionManager, ILocationManager locationManager)
+        public GameManager(IInteractionManager interactionManager, ILocationManager locationManager, IPlayerManager playerManager)
         {
             _interactionManager = interactionManager;
             _locationManager = locationManager;
+            _playerManager = playerManager;
         }
 
         public void Start()
@@ -98,8 +100,17 @@ namespace Demic.Managers
             //on setup, reset all variables to their defaults
             _boardState = new BoardStateManager(_locationManager);
             _infectionDrawCount = Properties.Settings.Default.DEFAULT_INFECTION_DRAW;
+
             DifficultyLevel diffLevel = GetDifficulty();
             _epidemicCards = (int)diffLevel;
+
+            int playerCount = GetPlayerCount();
+            for (int index = 1; index <= playerCount; index++)
+            {
+                _interactionManager.OutputContent(String.Format("CHARACTER CREATION FOR PLAYER {0}", index));
+                _playerManager.AddPlayer(CreatePlayer());
+                _interactionManager.OutputContent("-----");
+            }
 
             _interactionManager.OutputContent(String.Format("Epidemic Card Count for {0} is {1}", diffLevel.ToString(), _epidemicCards));
         }
@@ -115,6 +126,30 @@ namespace Demic.Managers
             var difficultyInput = _interactionManager.ReadInput("Please select a difficulty level for Epidemic", difficulties);
             DifficultyLevel difficultyLevel = (DifficultyLevel)Enum.Parse(typeof(DifficultyLevel), difficultyInput);
             return difficultyLevel;
+        }
+
+        private int GetPlayerCount()
+        {
+            var playerCountInput = _interactionManager.ReadInput("Please select a number of players for Epidemic", new List<string>() { "2", "3", "4" });
+            int playerCount = Int32.Parse(playerCountInput);
+            return playerCount;
+        }
+
+        private Player CreatePlayer()
+        {
+            var roles = new List<string>();
+            foreach (PlayerRole role in Enum.GetValues(typeof(PlayerRole)))
+            {
+                roles.Add(role.ToString());
+            }
+
+            var playerRoleInput = _interactionManager.ReadInput("Please select a Player Role", roles);
+            PlayerRole playerRole = (PlayerRole)Enum.Parse(typeof(PlayerRole), playerRoleInput);
+
+            var playerNameInput = _interactionManager.ReadInput("Please enter a name");
+
+            var player = new Player(playerNameInput, playerRole, _locationManager.StartingLocation);
+            return player;
         }
     }
 }

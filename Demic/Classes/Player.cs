@@ -1,26 +1,28 @@
-﻿using System;
+﻿using Demic.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Demic.Enums;
 
 namespace Demic.Classes
 {
-    class Location
+    internal class Player
     {
         public readonly string Name;
-        public readonly DiseaseColour Colour;
+        public readonly PlayerRole Role; 
+        public Location CurrentLocation;
 
-        public Location(string name, DiseaseColour colour)
+        public Player(string name, PlayerRole role, Location startingLocation)
         {
             this.Name = name;
-            this.Colour = colour;
+            this.Role = role;
+            CurrentLocation = startingLocation;
         }
 
         public override string ToString()
         {
-            return String.Format("{0} : {1}", Name, Colour.ToString());
+            return String.Format("{0} the {1}", Name, Role.ToString());
         }
 
         public override bool Equals(object obj)
@@ -29,14 +31,14 @@ namespace Demic.Classes
                 return true;
             if ((obj == null) || (obj.GetType() != this.GetType()))
                 return false;
-            
-            Location otherLoc = (Location)obj;
-            return (this.Name == otherLoc.Name);
+
+            Player otherPlayer = (Player)obj;
+            return (this.Name == otherPlayer.Name && this.Role == otherPlayer.Role);
         }
 
         public override int GetHashCode()
         {
-            return this.Name.GetHashCode();
+            return this.Name.GetHashCode() ^ this.Role.GetHashCode();
         }
     }
 }
