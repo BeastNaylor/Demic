@@ -35,5 +35,10 @@ namespace Demic.Classes
             Player otherPlayer = (Player)obj;
             return (this.Name == otherPlayer.Name && this.Role == otherPlayer.Role);
         }
+
+        public override int GetHashCode()
+        {
+            return this.Name.GetHashCode() ^ this.Role.GetHashCode();
+        }
     }
 }

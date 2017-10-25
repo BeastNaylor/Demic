@@ -33,5 +33,10 @@ namespace Demic.Classes
             Location otherLoc = (Location)obj;
             return (this.Name == otherLoc.Name);
         }
+
+        public override int GetHashCode()
+        {
+            return this.Name.GetHashCode();
+        }
     }
 }
