@@ -7,15 +7,17 @@ using System.Threading.Tasks;
 
 namespace Demic.Classes
 {
-    class Player
+    internal class Player
     {
         public readonly string Name;
-        public readonly PlayerRole Role;
+        public readonly PlayerRole Role; 
+        public Location CurrentLocation;
 
-        public Player(string name, PlayerRole role)
+        public Player(string name, PlayerRole role, Location startingLocation)
         {
             this.Name = name;
             this.Role = role;
+            CurrentLocation = startingLocation;
         }
 
         public override string ToString()
@@ -23,5 +25,15 @@ namespace Demic.Classes
             return String.Format("{0} the {1}", Name, Role.ToString());
         }
 
+        public override bool Equals(object obj)
+        {
+            if (this == obj)
+                return true;
+            if ((obj == null) || (obj.GetType() != this.GetType()))
+                return false;
+            // object must be Test at this point
+            Player otherPlayer = (Player)obj;
+            return (this.Name == otherPlayer.Name && this.Role == otherPlayer.Role);
+        }
     }
 }
