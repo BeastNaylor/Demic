@@ -57,6 +57,8 @@
     <Compile Include="TestLocationManager.cs" />
     <Compile Include="PlayerTests.cs" />
     <Compile Include="LocationTests.cs" />
+    <Compile Include="InfestationDeckTests.cs" />
+    <Compile Include="TestSingleLocationManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Demic\Demic.csproj">

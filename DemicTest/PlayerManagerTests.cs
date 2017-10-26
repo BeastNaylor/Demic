@@ -45,5 +45,22 @@ namespace DemicTest
             Assert.AreEqual<bool>(true, currentPlayer.Equals(newCurrentPlayer));
         }
 
+        [TestMethod]
+        public void SameRoleAdded()
+        {
+            var testPlayerOne = new Player("TESTONE", PlayerRole.MEDIC, new Location("TESTLOC", DiseaseColour.Black));
+            var playerManager = new PlayerManager();
+            playerManager.AddPlayer(testPlayerOne);
+            Assert.AreEqual<bool>(true, playerManager.RoleInUse(PlayerRole.MEDIC));
+        }
+
+        [TestMethod]
+        public void DifferentRoleAdded()
+        {
+            var testPlayerOne = new Player("TESTONE", PlayerRole.MEDIC, new Location("TESTLOC", DiseaseColour.Black));
+            var playerManager = new PlayerManager();
+            playerManager.AddPlayer(testPlayerOne);
+            Assert.AreEqual<bool>(false, playerManager.RoleInUse(PlayerRole.GENERALIST));
+        }
     }
 }

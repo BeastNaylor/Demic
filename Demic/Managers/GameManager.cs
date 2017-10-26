@@ -15,6 +15,7 @@ namespace Demic.Managers
         private int _epidemicCards;
         private int _infectionDrawCount;
         private BoardStateManager _boardState;
+        private InfectionDeckManager _infectionDeckManager;
 
         public GameManager(IInteractionManager interactionManager, ILocationManager locationManager, IPlayerManager playerManager)
         {
@@ -44,13 +45,18 @@ namespace Demic.Managers
             //this will output the state of the game currently, allowing the player to know what state the game is in
             //different levels of info, with drill down specifics
             //e.g.
-            _interactionManager.OutputContent(String.Format("Total Blue Cubes is currently {0}", _boardState.totalCubes(DiseaseColour.Blue)));
+            _interactionManager.OutputContent(String.Format("Current Player is currently {0} at {1}", _playerManager.CurrentPlayerTurn().ToString(), _playerManager.CurrentPlayerTurn().CurrentLocation.Name));
+            foreach (string locationWithCubes in _boardState.OutputLocationsAndDiseaseCounts())
+            {
+                _interactionManager.OutputContent(locationWithCubes);
+            }
         }
 
         private void TurnEnd()
         {
             //perform end of turn action, whilst checking for GameOver
             DrawPlayerCards();
+            _playerManager.EndPlayerTurn();
             DrawInfectionCards();
             if (_boardState.totalCubes(DiseaseColour.Blue) > 10)
             {
@@ -66,8 +72,11 @@ namespace Demic.Managers
         private void DrawInfectionCards()
         {
             //draw cards from the infection deck and add cubes
-            //e.g.
-            _boardState.AddCubes(_locationManager.GetLocations().First(), 1);
+            var drawnLocation = _infectionDeckManager.DrawCard();
+            if (drawnLocation != null)
+            {
+                _boardState.AddCubes(drawnLocation, 1);
+            }
         }
 
         private void DrawPlayerCards()
@@ -99,6 +108,7 @@ namespace Demic.Managers
         {
             //on setup, reset all variables to their defaults
             _boardState = new BoardStateManager(_locationManager);
+            _infectionDeckManager = new InfectionDeckManager(_locationManager);
             _infectionDrawCount = Properties.Settings.Default.DEFAULT_INFECTION_DRAW;
 
             DifficultyLevel diffLevel = GetDifficulty();
@@ -140,6 +150,7 @@ namespace Demic.Managers
             var roles = new List<string>();
             foreach (PlayerRole role in Enum.GetValues(typeof(PlayerRole)))
             {
+                if (!_playerManager.RoleInUse(role))
                 roles.Add(role.ToString());
             }
 

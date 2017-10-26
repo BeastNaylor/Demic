@@ -16,6 +16,11 @@ namespace Demic.Managers
             get { return _playerList.Count; }
         }
 
+        public bool RoleInUse(Enums.PlayerRole role)
+        {
+            return _playerList.Where(pl => pl.Role == role).Any();
+        }
+
         public PlayerManager()
         {
             _playerList = new List<Player>();

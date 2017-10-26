@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DemicTest
 {
-    class TestLocationManager :ILocationManager
+    class TestSingleLocationManager : ILocationManager
     {
         public Location StartingLocation
         {
@@ -20,8 +20,6 @@ namespace DemicTest
         {
             var locations = new List<Location>();
             locations.Add(new Location("Atlanta", DiseaseColour.Blue));
-            locations.Add(new Location("Miami", DiseaseColour.Blue));
-            locations.Add(new Location("New York", DiseaseColour.Blue));
             return locations;
         }
     }

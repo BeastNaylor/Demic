@@ -15,5 +15,7 @@ namespace Demic.Managers
         void EndPlayerTurn();
 
         Player CurrentPlayerTurn();
+
+        bool RoleInUse(Enums.PlayerRole role);
     }
 }
