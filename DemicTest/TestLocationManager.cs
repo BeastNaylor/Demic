@@ -20,6 +20,8 @@ namespace DemicTest
         {
             var locations = new List<Location>();
             locations.Add(new Location("Atlanta", DiseaseColour.Blue));
+            locations.Add(new Location("Miami", DiseaseColour.Blue));
+            locations.Add(new Location("New York", DiseaseColour.Blue));
             return locations;
         }
     }

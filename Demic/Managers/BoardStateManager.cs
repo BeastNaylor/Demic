@@ -19,6 +19,26 @@ namespace Demic.Managers
             get { return _outbreakCount; }
         }
 
+        public List<string> OutputLocationsAndDiseaseCounts()
+        {
+            var locations = new List<string>();
+            //loop through each location that has any cubes present in it
+            foreach (KeyValuePair<Location, IDictionary<DiseaseColour, int>> kvp in _boardLocations.Where(dct => dct.Value.Sum(disease => disease.Value) > 0))
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(String.Format("{0}  contains the following diseases: ", kvp.Key));
+                foreach (KeyValuePair<DiseaseColour, int> disease in kvp.Value)
+                {
+                    if (disease.Value > 0)
+                    {
+                        sb.Append(String.Format("{0} [{1}] ", disease.Key.ToString(), disease.Value));
+                    }
+                }
+                locations.Add(sb.ToString());
+            }
+            return locations;
+        }
+
         public int totalCubes(DiseaseColour disease)
         {
             //sum up the cubes of the given disease

@@ -45,7 +45,10 @@ namespace Demic.Managers
             //different levels of info, with drill down specifics
             //e.g.
             _interactionManager.OutputContent(String.Format("Current Player is currently {0} at {1}", _playerManager.CurrentPlayerTurn().ToString(), _playerManager.CurrentPlayerTurn().CurrentLocation.Name));
-            _interactionManager.OutputContent(String.Format("Total Blue Cubes is currently {0}", _boardState.totalCubes(DiseaseColour.Blue)));
+            foreach (string locationWithCubes in _boardState.OutputLocationsAndDiseaseCounts())
+            {
+                _interactionManager.OutputContent(locationWithCubes);
+            }
         }
 
         private void TurnEnd()

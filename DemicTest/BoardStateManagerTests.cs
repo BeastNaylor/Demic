@@ -3,6 +3,7 @@ using Demic.Managers;
 using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Demic.Classes;
 
 namespace DemicTest
 {
@@ -23,7 +24,7 @@ namespace DemicTest
         }
 
         [TestMethod]
-        public void AddCubeToAtlanta()
+        public void AddCube()
         {
             var testLocationManager = new TestLocationManager();
             var loc = testLocationManager.GetLocations().First();
@@ -33,7 +34,7 @@ namespace DemicTest
         }
 
         [TestMethod]
-        public void SetCubesToThreeFromZeroAtAtlanta()
+        public void SetCubesToThreeFromZero()
         {
             var testLocationManager = new TestLocationManager();
             var loc = testLocationManager.GetLocations().First();
@@ -43,7 +44,7 @@ namespace DemicTest
         }
 
         [TestMethod]
-        public void SetCubesToThreeFromTwoAtAtlanta()
+        public void SetCubesToThreeFromTwo()
         {
             var testLocationManager = new TestLocationManager();
             var loc = testLocationManager.GetLocations().First();
@@ -59,6 +60,18 @@ namespace DemicTest
             var testLocationManager = new TestLocationManager();
             var boardManager = new BoardStateManager(testLocationManager);
             Assert.AreEqual<int>(0, boardManager.OutbreakCount);
+        }
+
+        [TestMethod]
+        public void OutputCubesForOnlyTwoPlaces()
+        {
+            var testLocationManager = new TestLocationManager();
+            var boardManager = new BoardStateManager(testLocationManager);
+            foreach (Location loc in testLocationManager.GetLocations().Take(2))
+            {
+                boardManager.AddCubes(loc, 2);
+            }
+            Assert.AreEqual(2, boardManager.OutputLocationsAndDiseaseCounts().Count);
         }
     }
 }
