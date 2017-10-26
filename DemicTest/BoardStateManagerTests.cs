@@ -26,7 +26,7 @@ namespace DemicTest
         [TestMethod]
         public void AddCube()
         {
-            var testLocationManager = new TestLocationManager();
+            var testLocationManager = new TestSingleLocationManager();
             var loc = testLocationManager.GetLocations().First();
             var boardManager = new BoardStateManager(testLocationManager);
             boardManager.AddCubes(loc, 2);
@@ -36,7 +36,7 @@ namespace DemicTest
         [TestMethod]
         public void SetCubesToThreeFromZero()
         {
-            var testLocationManager = new TestLocationManager();
+            var testLocationManager = new TestSingleLocationManager();
             var loc = testLocationManager.GetLocations().First();
             var boardManager = new BoardStateManager(testLocationManager);
             boardManager.SetCubes(loc, 3);
@@ -46,7 +46,7 @@ namespace DemicTest
         [TestMethod]
         public void SetCubesToThreeFromTwo()
         {
-            var testLocationManager = new TestLocationManager();
+            var testLocationManager = new TestSingleLocationManager();
             var loc = testLocationManager.GetLocations().First();
             var boardManager = new BoardStateManager(testLocationManager);
             boardManager.AddCubes(loc, 2);
@@ -57,7 +57,7 @@ namespace DemicTest
         [TestMethod]
         public void OutbreakCountStartsAtZero()
         {
-            var testLocationManager = new TestLocationManager();
+            var testLocationManager = new TestSingleLocationManager();
             var boardManager = new BoardStateManager(testLocationManager);
             Assert.AreEqual<int>(0, boardManager.OutbreakCount);
         }

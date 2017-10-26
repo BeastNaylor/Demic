@@ -15,6 +15,7 @@ namespace Demic.Managers
         private int _epidemicCards;
         private int _infectionDrawCount;
         private BoardStateManager _boardState;
+        private InfectionDeckManager _infectionDeckManager;
 
         public GameManager(IInteractionManager interactionManager, ILocationManager locationManager, IPlayerManager playerManager)
         {
@@ -71,8 +72,11 @@ namespace Demic.Managers
         private void DrawInfectionCards()
         {
             //draw cards from the infection deck and add cubes
-            //e.g.
-            _boardState.AddCubes(_locationManager.GetLocations().First(), 1);
+            var drawnLocation = _infectionDeckManager.DrawCard();
+            if (drawnLocation != null)
+            {
+                _boardState.AddCubes(drawnLocation, 1);
+            }
         }
 
         private void DrawPlayerCards()
@@ -104,6 +108,7 @@ namespace Demic.Managers
         {
             //on setup, reset all variables to their defaults
             _boardState = new BoardStateManager(_locationManager);
+            _infectionDeckManager = new InfectionDeckManager(_locationManager);
             _infectionDrawCount = Properties.Settings.Default.DEFAULT_INFECTION_DRAW;
 
             DifficultyLevel diffLevel = GetDifficulty();

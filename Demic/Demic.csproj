@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Classes\Player.cs" />
     <Compile Include="Enums\PlayerRole.cs" />
+    <Compile Include="Lib\Shuffle.cs" />
     <Compile Include="Managers\BoardStateManager.cs" />
     <Compile Include="Classes\Location.cs" />
     <Compile Include="Enums\DifficultyLevel.cs" />
@@ -51,8 +52,10 @@
     <Compile Include="Managers\GameManager.cs" />
     <Compile Include="Managers\ConsoleInteractionManager.cs" />
     <Compile Include="Enums\OutputLevel.cs" />
+    <Compile Include="Managers\IInfectionDeckManager.cs" />
     <Compile Include="Managers\IInteractionManager.cs" />
     <Compile Include="Managers\ILocationManager.cs" />
+    <Compile Include="Managers\InfectionDeckManager.cs" />
     <Compile Include="Managers\IPlayerManager.cs" />
     <Compile Include="Managers\LocationManager.cs" />
     <Compile Include="Managers\PlayerManager.cs" />
