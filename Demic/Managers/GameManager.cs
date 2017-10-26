@@ -44,6 +44,7 @@ namespace Demic.Managers
             //this will output the state of the game currently, allowing the player to know what state the game is in
             //different levels of info, with drill down specifics
             //e.g.
+            _interactionManager.OutputContent(String.Format("Current Player is currently {0} at {1}", _playerManager.CurrentPlayerTurn().ToString(), _playerManager.CurrentPlayerTurn().CurrentLocation.Name));
             _interactionManager.OutputContent(String.Format("Total Blue Cubes is currently {0}", _boardState.totalCubes(DiseaseColour.Blue)));
         }
 
@@ -51,6 +52,7 @@ namespace Demic.Managers
         {
             //perform end of turn action, whilst checking for GameOver
             DrawPlayerCards();
+            _playerManager.EndPlayerTurn();
             DrawInfectionCards();
             if (_boardState.totalCubes(DiseaseColour.Blue) > 10)
             {
@@ -140,6 +142,7 @@ namespace Demic.Managers
             var roles = new List<string>();
             foreach (PlayerRole role in Enum.GetValues(typeof(PlayerRole)))
             {
+                if (!_playerManager.RoleInUse(role))
                 roles.Add(role.ToString());
             }
 
