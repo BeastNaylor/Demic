@@ -118,7 +118,7 @@ namespace Demic.Managers
             for (int index = 1; index <= playerCount; index++)
             {
                 _interactionManager.OutputContent(String.Format("CHARACTER CREATION FOR PLAYER {0}", index));
-                _playerManager.AddPlayer(CreatePlayer());
+                _playerManager.AddPlayer(GetPlayerRole());
                 _interactionManager.OutputContent("-----");
             }
 
@@ -145,7 +145,7 @@ namespace Demic.Managers
             return playerCount;
         }
 
-        private Player CreatePlayer()
+        private PlayerRole GetPlayerRole()
         {
             var roles = new List<string>();
             foreach (PlayerRole role in Enum.GetValues(typeof(PlayerRole)))
@@ -156,9 +156,7 @@ namespace Demic.Managers
 
             var playerRoleInput = _interactionManager.ReadInput("Please select a Player Role", roles);
             PlayerRole playerRole = (PlayerRole)Enum.Parse(typeof(PlayerRole), playerRoleInput);
-
-            var player = new Player(playerRole, _locationManager.StartingLocation);
-            return player;
+            return playerRole;
         }
     }
 }
