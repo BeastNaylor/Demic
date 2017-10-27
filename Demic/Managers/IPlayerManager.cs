@@ -1,4 +1,5 @@
 ﻿using Demic.Classes;
+using Demic.Enums;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,12 +11,12 @@ namespace Demic.Managers
 {
     interface IPlayerManager
     {
-        void AddPlayer(Player player);
+        void AddPlayer(PlayerRole role);
 
         void EndPlayerTurn();
 
         Player CurrentPlayerTurn();
 
-        bool RoleInUse(Enums.PlayerRole role);
+        bool RoleInUse(PlayerRole role);
     }
 }

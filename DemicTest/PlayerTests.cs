@@ -11,9 +11,8 @@ namespace DemicTest
         [TestMethod]
         public void ComparePlayersWithSameRole()
         {
-            var loc = new Location("TESTLOC", DiseaseColour.Black);
-            var playerOne = new Player(PlayerRole.MEDIC, loc);
-            var playerTwo = new Player(PlayerRole.MEDIC, loc);
+            var playerOne = new MedicPlayer();
+            var playerTwo = new MedicPlayer();
             Assert.AreEqual<bool>(true, playerOne.Equals(playerTwo));
         }
 
@@ -21,8 +20,8 @@ namespace DemicTest
         public void ComparePlayersWithdDifferentRole()
         {
             var loc = new Location("TESTLOC", DiseaseColour.Black);
-            var playerOne = new Player(PlayerRole.MEDIC, loc);
-            var playerTwo = new Player(PlayerRole.GENERALIST, loc);
+            var playerOne = new MedicPlayer();
+            var playerTwo = new GeneralistPlayer();
             Assert.AreEqual<bool>(false, playerOne.Equals(playerTwo));
         }
     }

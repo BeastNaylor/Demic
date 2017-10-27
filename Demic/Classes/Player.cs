@@ -7,15 +7,13 @@ using System.Threading.Tasks;
 
 namespace Demic.Classes
 {
-    internal class Player
+    abstract class Player
     {
-        public readonly PlayerRole Role; 
+        abstract public PlayerRole Role { get; }
         public Location CurrentLocation;
 
-        public Player(PlayerRole role, Location startingLocation)
+        public Player()
         {
-            this.Role = role;
-            CurrentLocation = startingLocation;
         }
 
         public override string ToString()
