@@ -16,6 +16,11 @@ namespace Demic.Classes
         {
         }
 
+        public virtual int GetNumberOfActions()
+        {
+            return Properties.Settings.Default.DEFAULT_PLAYER_ACTIONS;
+        }
+
         public override string ToString()
         {
             return Role.ToString();

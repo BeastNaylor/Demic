@@ -45,7 +45,8 @@ namespace Demic.Managers
             //this will output the state of the game currently, allowing the player to know what state the game is in
             //different levels of info, with drill down specifics
             //e.g.
-            _interactionManager.OutputContent(String.Format("Current Player is currently {0} at {1}", _playerManager.CurrentPlayerTurn().ToString(), _playerManager.CurrentPlayerTurn().CurrentLocation.Name));
+            var player = _playerManager.CurrentPlayerTurn();
+            _interactionManager.OutputContent(String.Format("Current Player is currently {0} at {1} with {2} actions", player.ToString(), player.CurrentLocation.Name, player.GetNumberOfActions()));
             foreach (string locationWithCubes in _boardState.OutputLocationsAndDiseaseCounts())
             {
                 _interactionManager.OutputContent(locationWithCubes);

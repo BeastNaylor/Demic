@@ -13,5 +13,10 @@ namespace Demic.Classes
         {
             get { return PlayerRole.GENERALIST; }
         }
+
+        public override int GetNumberOfActions()
+        {
+            return base.GetNumberOfActions() +1;
+        }
     }
 }
