@@ -15,7 +15,8 @@ namespace Demic.Managers
         private int _epidemicCards;
         private int _infectionDrawCount;
         private BoardStateManager _boardState;
-        private InfectionDeckManager _infectionDeckManager;
+        private IInfectionDeckManager _infectionDeckManager;
+        private ICureDeckManager _cureDeckManager;
 
         public GameManager(IInteractionManager interactionManager, ILocationManager locationManager, IPlayerManager playerManager)
         {
@@ -56,7 +57,10 @@ namespace Demic.Managers
         private void TurnEnd()
         {
             //perform end of turn action, whilst checking for GameOver
-            DrawPlayerCards();
+            var cureCard = _cureDeckManager.DrawCard();
+            //if you can't draw a cure card, it is gameover
+            if (cureCard == null) { GameOver(); }
+            _interactionManager.OutputContent(String.Format("Cure Card Drawn: {0}", cureCard.ToString()));
             _playerManager.EndPlayerTurn();
             DrawInfectionCards();
             if (_boardState.totalCubes(DiseaseColour.Blue) > 10)
@@ -110,6 +114,7 @@ namespace Demic.Managers
             //on setup, reset all variables to their defaults
             _boardState = new BoardStateManager(_locationManager);
             _infectionDeckManager = new InfectionDeckManager(_locationManager);
+            _cureDeckManager = new CureDeckManager(_locationManager);
             _infectionDrawCount = Properties.Settings.Default.DEFAULT_INFECTION_DRAW;
 
             DifficultyLevel diffLevel = GetDifficulty();

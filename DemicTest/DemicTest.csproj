@@ -50,6 +50,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CureDeckManagerTests.cs" />
     <Compile Include="LocationManagerTests.cs" />
     <Compile Include="PlayerManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
