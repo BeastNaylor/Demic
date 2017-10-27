@@ -13,7 +13,7 @@ namespace DemicTest
         [TestMethod]
         public void AddPlayerAndCheckIsCurrent()
         {
-            var testPlayer = new Player("TEST", PlayerRole.MEDIC, new Location("TESTLOC", DiseaseColour.Black));
+            var testPlayer = new Player(PlayerRole.MEDIC, new Location("TESTLOC", DiseaseColour.Black));
             var playerManager = new PlayerManager();
             playerManager.AddPlayer(testPlayer);
             Assert.AreEqual<int>(1, playerManager.NumberOfPlayers, "Player not successfully added");
@@ -22,8 +22,8 @@ namespace DemicTest
         [TestMethod]
         public void MultiplePlayerEndTurnChangesCurrentPlayer()
         {
-            var testPlayerOne = new Player("TESTONE", PlayerRole.MEDIC, new Location("TESTLOC", DiseaseColour.Black));
-            var testPlayerTwo = new Player("TESTTWO", PlayerRole.GENERALIST, new Location("TESTLOC", DiseaseColour.Black));
+            var testPlayerOne = new Player(PlayerRole.MEDIC, new Location("TESTLOC", DiseaseColour.Black));
+            var testPlayerTwo = new Player(PlayerRole.GENERALIST, new Location("TESTLOC", DiseaseColour.Black));
             var playerManager = new PlayerManager();
             playerManager.AddPlayer(testPlayerOne);
             playerManager.AddPlayer(testPlayerTwo);
@@ -36,7 +36,7 @@ namespace DemicTest
         [TestMethod]
         public void SingePlayerEndTurnSamePlayerNextTurn()
         {
-            var testPlayerOne = new Player("TESTONE", PlayerRole.MEDIC, new Location("TESTLOC", DiseaseColour.Black));
+            var testPlayerOne = new Player(PlayerRole.MEDIC, new Location("TESTLOC", DiseaseColour.Black));
             var playerManager = new PlayerManager();
             playerManager.AddPlayer(testPlayerOne);
             var currentPlayer = playerManager.CurrentPlayerTurn();
@@ -48,7 +48,7 @@ namespace DemicTest
         [TestMethod]
         public void SameRoleAdded()
         {
-            var testPlayerOne = new Player("TESTONE", PlayerRole.MEDIC, new Location("TESTLOC", DiseaseColour.Black));
+            var testPlayerOne = new Player(PlayerRole.MEDIC, new Location("TESTLOC", DiseaseColour.Black));
             var playerManager = new PlayerManager();
             playerManager.AddPlayer(testPlayerOne);
             Assert.AreEqual<bool>(true, playerManager.RoleInUse(PlayerRole.MEDIC));
@@ -57,7 +57,7 @@ namespace DemicTest
         [TestMethod]
         public void DifferentRoleAdded()
         {
-            var testPlayerOne = new Player("TESTONE", PlayerRole.MEDIC, new Location("TESTLOC", DiseaseColour.Black));
+            var testPlayerOne = new Player(PlayerRole.MEDIC, new Location("TESTLOC", DiseaseColour.Black));
             var playerManager = new PlayerManager();
             playerManager.AddPlayer(testPlayerOne);
             Assert.AreEqual<bool>(false, playerManager.RoleInUse(PlayerRole.GENERALIST));

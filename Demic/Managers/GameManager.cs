@@ -157,9 +157,7 @@ namespace Demic.Managers
             var playerRoleInput = _interactionManager.ReadInput("Please select a Player Role", roles);
             PlayerRole playerRole = (PlayerRole)Enum.Parse(typeof(PlayerRole), playerRoleInput);
 
-            var playerNameInput = _interactionManager.ReadInput("Please enter a name");
-
-            var player = new Player(playerNameInput, playerRole, _locationManager.StartingLocation);
+            var player = new Player(playerRole, _locationManager.StartingLocation);
             return player;
         }
     }

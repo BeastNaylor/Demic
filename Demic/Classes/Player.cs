@@ -9,20 +9,18 @@ namespace Demic.Classes
 {
     internal class Player
     {
-        public readonly string Name;
         public readonly PlayerRole Role; 
         public Location CurrentLocation;
 
-        public Player(string name, PlayerRole role, Location startingLocation)
+        public Player(PlayerRole role, Location startingLocation)
         {
-            this.Name = name;
             this.Role = role;
             CurrentLocation = startingLocation;
         }
 
         public override string ToString()
         {
-            return String.Format("{0} the {1}", Name, Role.ToString());
+            return Role.ToString();
         }
 
         public override bool Equals(object obj)
@@ -33,12 +31,12 @@ namespace Demic.Classes
                 return false;
 
             Player otherPlayer = (Player)obj;
-            return (this.Name == otherPlayer.Name && this.Role == otherPlayer.Role);
+            return (this.Role == otherPlayer.Role);
         }
 
         public override int GetHashCode()
         {
-            return this.Name.GetHashCode() ^ this.Role.GetHashCode();
+            return this.Role.GetHashCode();
         }
     }
 }
