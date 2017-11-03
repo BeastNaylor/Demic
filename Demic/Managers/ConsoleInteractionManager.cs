@@ -16,45 +16,38 @@ namespace Demic.Managers
             _minimumLevel = level;
         }
 
-        public string ReadInput(string message, List<string> options)
+        public string ReadInput(string message, List<string> options = null)
         {
             bool inputValid = false;
+            bool restrictedInput = (options != null);
             string input;
             do
             {
                 this.OutputContent(message);
-                this.OutputContent("[Options are: " + String.Join(", ", options.ToArray()) + "]");
+                if (restrictedInput)
+                {
+                    this.OutputContent("[Options are: " + String.Join(", ", options.ToArray()) + "]");    
+                }
+                else
+                {
+                    this.OutputContent("[Max Length: " + Properties.Settings.Default.MAX_INPUT_LENGTH + "]");
+                }
                 input = Console.ReadLine().ToUpper();
-                this.OutputContent(input, OutputLevel.Debug);
-                if (options.Contains(input))
+                this.OutputContent("---" + System.Environment.NewLine);
+                if ((options.Contains(input) && restrictedInput) || (!restrictedInput && input.Length <= Properties.Settings.Default.MAX_INPUT_LENGTH))
                 {
                     inputValid = true;
                 }
                 else
                 {
-                    this.OutputContent("Invalid selection. Please try again.");
-                }
-            } while (!inputValid);
-            return input;
-        }
-
-        public string ReadInput(string message)
-        {
-            bool inputValid = false;
-            string input;
-            do
-            {
-                this.OutputContent(message);
-                this.OutputContent("[Max Length: " + Properties.Settings.Default.MAX_INPUT_LENGTH + "]");
-                input = Console.ReadLine().ToUpper();
-                this.OutputContent(input, OutputLevel.Debug);
-                if (input.Length <= Properties.Settings.Default.MAX_INPUT_LENGTH)
-                {
-                    inputValid = true;
-                }
-                else
-                {
-                    this.OutputContent("Input too long. Please try again.");
+                    if (restrictedInput)
+                    {
+                        this.OutputContent("Invalid selection. Please try again.");
+                    }
+                    else
+                    {
+                        this.OutputContent("Input too long. Please try again.");
+                    }
                 }
             } while (!inputValid);
             return input;
