@@ -15,7 +15,8 @@ namespace Demic.Managers
         private int _epidemicCards;
         private int _infectionDrawCount;
         private BoardStateManager _boardState;
-        private InfectionDeckManager _infectionDeckManager;
+        private IInfectionDeckManager _infectionDeckManager;
+        private ICureDeckManager _cureDeckManager;
 
         public GameManager(IInteractionManager interactionManager, ILocationManager locationManager, IPlayerManager playerManager)
         {
@@ -45,7 +46,8 @@ namespace Demic.Managers
             //this will output the state of the game currently, allowing the player to know what state the game is in
             //different levels of info, with drill down specifics
             //e.g.
-            _interactionManager.OutputContent(String.Format("Current Player is currently {0} at {1}", _playerManager.CurrentPlayerTurn().ToString(), _playerManager.CurrentPlayerTurn().CurrentLocation.Name));
+            var player = _playerManager.CurrentPlayerTurn();
+            _interactionManager.OutputContent(String.Format("Current Player is currently {0} at {1} with {2} actions", player.ToString(), player.CurrentLocation.Name, player.GetNumberOfActions()));
             foreach (string locationWithCubes in _boardState.OutputLocationsAndDiseaseCounts())
             {
                 _interactionManager.OutputContent(locationWithCubes);
@@ -55,7 +57,10 @@ namespace Demic.Managers
         private void TurnEnd()
         {
             //perform end of turn action, whilst checking for GameOver
-            DrawPlayerCards();
+            var cureCard = _cureDeckManager.DrawCard();
+            //if you can't draw a cure card, it is gameover
+            if (cureCard == null) { GameOver(); }
+            _interactionManager.OutputContent(String.Format("Cure Card Drawn: {0}", cureCard.ToString()));
             _playerManager.EndPlayerTurn();
             DrawInfectionCards();
             if (_boardState.totalCubes(DiseaseColour.Blue) > 10)
@@ -109,6 +114,7 @@ namespace Demic.Managers
             //on setup, reset all variables to their defaults
             _boardState = new BoardStateManager(_locationManager);
             _infectionDeckManager = new InfectionDeckManager(_locationManager);
+            _cureDeckManager = new CureDeckManager(_locationManager);
             _infectionDrawCount = Properties.Settings.Default.DEFAULT_INFECTION_DRAW;
 
             DifficultyLevel diffLevel = GetDifficulty();
@@ -118,11 +124,13 @@ namespace Demic.Managers
             for (int index = 1; index <= playerCount; index++)
             {
                 _interactionManager.OutputContent(String.Format("CHARACTER CREATION FOR PLAYER {0}", index));
-                _playerManager.AddPlayer(CreatePlayer());
-                _interactionManager.OutputContent("-----");
+                _playerManager.AddPlayer(GetPlayerRole());
             }
 
             _interactionManager.OutputContent(String.Format("Epidemic Card Count for {0} is {1}", diffLevel.ToString(), _epidemicCards));
+            _interactionManager.OutputContent(String.Format("Press any key to start game..."));
+            _interactionManager.Pause();
+            _interactionManager.ClearOutput();
         }
 
         private DifficultyLevel GetDifficulty()
@@ -145,7 +153,7 @@ namespace Demic.Managers
             return playerCount;
         }
 
-        private Player CreatePlayer()
+        private PlayerRole GetPlayerRole()
         {
             var roles = new List<string>();
             foreach (PlayerRole role in Enum.GetValues(typeof(PlayerRole)))
@@ -156,11 +164,7 @@ namespace Demic.Managers
 
             var playerRoleInput = _interactionManager.ReadInput("Please select a Player Role", roles);
             PlayerRole playerRole = (PlayerRole)Enum.Parse(typeof(PlayerRole), playerRoleInput);
-
-            var playerNameInput = _interactionManager.ReadInput("Please enter a name");
-
-            var player = new Player(playerNameInput, playerRole, _locationManager.StartingLocation);
-            return player;
+            return playerRole;
         }
     }
 }

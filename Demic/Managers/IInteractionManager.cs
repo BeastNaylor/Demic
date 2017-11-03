@@ -9,8 +9,11 @@ namespace Demic.Managers
 {
     interface IInteractionManager
     {
-        string ReadInput(string message);
         string ReadInput(string message, List<string> options);
+
+        void Pause();
+
+        void ClearOutput();
 
         void OutputContent(string message, OutputLevel level = OutputLevel.Information);
     }

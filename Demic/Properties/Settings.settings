@@ -17,5 +17,8 @@
     <Setting Name="MAX_INPUT_LENGTH" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">10</Value>
     </Setting>
+    <Setting Name="DEFAULT_PLAYER_ACTIONS" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

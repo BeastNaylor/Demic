@@ -42,16 +42,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\GeneralistPlayer.cs" />
+    <Compile Include="Classes\MedicPlayer.cs" />
     <Compile Include="Classes\Player.cs" />
+    <Compile Include="Classes\ResearcherPlayer.cs" />
     <Compile Include="Enums\PlayerRole.cs" />
     <Compile Include="Lib\Shuffle.cs" />
     <Compile Include="Managers\BoardStateManager.cs" />
     <Compile Include="Classes\Location.cs" />
     <Compile Include="Enums\DifficultyLevel.cs" />
     <Compile Include="Enums\DiseaseColour.cs" />
+    <Compile Include="Managers\CureDeckManager.cs" />
     <Compile Include="Managers\GameManager.cs" />
     <Compile Include="Managers\ConsoleInteractionManager.cs" />
     <Compile Include="Enums\OutputLevel.cs" />
+    <Compile Include="Managers\ICureDeckManager.cs" />
     <Compile Include="Managers\IInfectionDeckManager.cs" />
     <Compile Include="Managers\IInteractionManager.cs" />
     <Compile Include="Managers\ILocationManager.cs" />

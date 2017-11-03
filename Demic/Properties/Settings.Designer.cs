@@ -79,5 +79,17 @@ namespace Demic.Properties {
                 this["MAX_INPUT_LENGTH"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("4")]
+        public int DEFAULT_PLAYER_ACTIONS {
+            get {
+                return ((int)(this["DEFAULT_PLAYER_ACTIONS"]));
+            }
+            set {
+                this["DEFAULT_PLAYER_ACTIONS"] = value;
+            }
+        }
     }
 }
