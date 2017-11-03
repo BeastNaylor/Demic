@@ -125,10 +125,13 @@ namespace Demic.Managers
             {
                 _interactionManager.OutputContent(String.Format("CHARACTER CREATION FOR PLAYER {0}", index));
                 _playerManager.AddPlayer(GetPlayerRole());
-                _interactionManager.OutputContent("-----");
+                _interactionManager.OutputContent("-----" + System.Environment.NewLine);
             }
 
             _interactionManager.OutputContent(String.Format("Epidemic Card Count for {0} is {1}", diffLevel.ToString(), _epidemicCards));
+            _interactionManager.OutputContent(String.Format("Press any key to start game..."));
+            _interactionManager.Pause();
+            _interactionManager.ClearOutput();
         }
 
         private DifficultyLevel GetDifficulty()

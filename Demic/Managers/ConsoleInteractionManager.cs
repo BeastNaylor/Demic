@@ -68,9 +68,14 @@ namespace Demic.Managers
             }
         }
 
-        internal void Pause()
+        public void Pause()
         {
             Console.ReadKey();
+        }
+
+        public void ClearOutput()
+        {
+            Console.Clear();
         }
     }
 }
